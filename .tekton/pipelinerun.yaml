@@ -16,7 +16,7 @@ spec:
   params:
     - name: repo-url
       value: "{{ repo_url }}"
-    - name: tag-name
+    - name: revision
       value: "{{ revision }}"
     - name: image
       value: quay.io/pgarg/java-tutorial
@@ -32,3 +32,6 @@ spec:
     - name: quay-cred
       secret:
         secretName: quay-secret
+    - name: maven-settings
+      configMap:
+        name: maven-settings
