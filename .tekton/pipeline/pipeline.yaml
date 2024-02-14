@@ -26,6 +26,7 @@ spec:
   workspaces:
     - name: workspace
     - name: quay-cred
+    - name: maven-settings
 
   # Taksks
   tasks:
@@ -73,6 +74,8 @@ spec:
       workspaces:
         - name: source
           workspace: workspace
+        - name: maven-settings
+          workspace: maven-settings
 
     # 3. Task - buildah build & push
     - name: buildah
@@ -116,8 +119,8 @@ spec:
           value: |
             kubectl apply -f k8s/
             echo "----------"
-            kubectl patch deployment spring-boot-docker -p '{"spec":{"template":{"spec":{"containers":[{"name":"spring-boot-docker","image":"$(params.image-full-path-with-tag)"}]}}}}'
+            kubectl patch deployment spring-boot-docker -p '{"spec":{"template":{"spec":{"containers":[{"name":"spring-boot-docker","image":"$(params.image)"}]}}}}'
             kubectl get deployment
       workspaces:
         - name: manifest-dir
-          workspace: source
+          workspace: workspace

@@ -12,11 +12,14 @@ spec:
     app: spring-boot-docker
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-boot-docker
 spec:
+  selector:
+    matchLabels:
+      app: spring-boot-docker
   replicas: 1
   template:
     metadata:
